@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<h2>Admin Panel — Slot Status</h2>
+
+{% for slot in slots %} <p>Slot {{slot[0]}} — {{slot[1]}}</p>
+{% endfor %}
+
+<br>
+<a href="/">Back to Home</a>
+
+</body>
+</html>

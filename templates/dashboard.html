@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h2>Available Parking Slots</h2>
+
+{% for slot in slots %} <p>
+Slot {{slot[0]}} — {{slot[1]}}
+{% if slot[1] == 'Available' %} <a href="/book/{{slot[0]}}">Book</a>
+{% endif %} </p>
+{% endfor %}
+
+<br>
+<a href="/">Logout</a>
+
+</body>
+</html>
