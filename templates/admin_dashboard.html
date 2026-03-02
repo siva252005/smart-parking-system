@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h3 class="mb-4">📊 Admin Analytics Dashboard</h3>
+
+<!-- KPI CARDS -->
+<div class="row mb-4">
+
+    <div class="col-md-3">
+        <div class="card bg-primary text-white shadow">
+            <div class="card-body text-center">
+                <h6>Total Slots</h6>
+                <h3>{{ total_slots }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-danger text-white shadow">
+            <div class="card-body text-center">
+                <h6>Occupied Slots</h6>
+                <h3>{{ occupied }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-success text-white shadow">
+            <div class="card-body text-center">
+                <h6>Total Revenue (₹)</h6>
+                <h3>{{ revenue }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-dark text-white shadow">
+            <div class="card-body text-center">
+                <h6>Occupancy Rate</h6>
+                <h3>{{ occupancy_rate }}%</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Download Report Button -->
+<div class="mb-3">
+    <a href="/admin/download-report" class="btn btn-success">
+        ⬇ Download Revenue Report (CSV)
+    </a>
+</div>
+
+<!-- Revenue & Booking Overview Chart -->
+<div class="card shadow p-4 mb-4">
+    <h5>Revenue & Booking Overview</h5>
+    <canvas id="overviewChart"></canvas>
+</div>
+
+<!-- Daily Revenue Trend -->
+<div class="card shadow p-4 mb-4">
+    <h5>Daily Revenue Trend</h5>
+    <canvas id="trendChart"></canvas>
+</div>
+
+<!-- Peak Hour Analysis -->
+<div class="card shadow p-4 mt-4">
+    <h5>Peak Hour Analysis</h5>
+    <canvas id="peakChart"></canvas>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Revenue & Bookings Overview
+    new Chart(document.getElementById('overviewChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Revenue (₹)', 'Total Bookings'],
+            datasets: [{
+                label: 'Overview',
+                data: [{{ revenue }}, {{ total_bookings }}],
+                backgroundColor: ['#0d6efd', '#dc3545']
+            }]
+        }
+    });
+
+    // Daily Revenue Trend
+    new Chart(document.getElementById('trendChart'), {
+        type: 'line',
+        data: {
+            labels: {{ dates | tojson }},
+            datasets: [{
+                label: 'Daily Revenue',
+                data: {{ revenues | tojson }},
+                borderColor: 'green',
+                backgroundColor: 'rgba(0,128,0,0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        }
+    });
+
+    // Peak Hour Analysis
+    const peakCtx = document.getElementById('peakChart');
+
+    new Chart(peakCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ hours|tojson }},
+            datasets: [{
+                label: 'Bookings Per Hour',
+                data: {{ counts|tojson }},
+                backgroundColor: 'orange'
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

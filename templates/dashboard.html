@@ -1,21 +1,57 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
+{% block content %}
 
-<h2>Available Parking Slots</h2>
+<h3 class="mb-4">🚗 User Dashboard</h3>
 
-{% for slot in slots %} <p>
-Slot {{slot[0]}} — {{slot[1]}}
-{% if slot[1] == 'Available' %} <a href="/book/{{slot[0]}}">Book</a>
-{% endif %} </p>
+<div class="row">
+
+{% for slot in slots %}
+<div class="col-md-3 mb-3">
+    <div class="card shadow-sm">
+        <div class="card-body text-center">
+
+            <h5>Slot {{ slot['id'] }}</h5>
+
+            <p>
+                {% if slot['status'] == "Available" %}
+                    <span class="badge bg-success">Available</span>
+                {% else %}
+                    <span class="badge bg-danger">Occupied</span>
+                {% endif %}
+            </p>
+
+            {% if active_slot_id %}
+                
+                {% if slot['id'] == active_slot_id %}
+                    <button class="btn btn-warning btn-sm" disabled>
+                        Your Active Booking
+                    </button>
+                {% else %}
+                    <button class="btn btn-secondary btn-sm" disabled>
+                        Already Booked
+                    </button>
+                {% endif %}
+
+            {% else %}
+
+                {% if slot['status'] == "Available" %}
+                    <a href="/book/{{ slot['id'] }}" class="btn btn-primary btn-sm">
+                        Book Now
+                    </a>
+                {% else %}
+                    <button class="btn btn-secondary btn-sm" disabled>
+                        Occupied
+                    </button>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
 {% endfor %}
 
-<br>
-<a href="/">Logout</a>
+</div>
 
-</body>
-</html>
+{% endblock %}
