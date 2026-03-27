@@ -240,31 +240,31 @@ else:
   <tbody>
     <tr>
       <td>Phase 1: Role-based Authentication</td>
-      <td>🔥 Ready to Start</td>
+      <td> completed ✅</td>
     </tr>
     <tr>
       <td>Phase 2: Professional UI Layout</td>
-      <td>⏳ Pending</td>
+      <td>completed ✅</td>
     </tr>
     <tr>
       <td>Phase 3: Booking + Billing</td>
-      <td>⏳ Pending</td>
+      <td>completed ✅</td>
     </tr>
     <tr>
       <td>Phase 4: Booking History</td>
-      <td>⏳ Pending</td>
+      <td>completed ✅</td>
     </tr>
     <tr>
       <td>Phase 5: Admin Dashboard</td>
-      <td>⏳ Pending</td>
+      <td>completed ✅</td>
     </tr>
     <tr>
       <td>Phase 6: Analytics Charts</td>
-      <td>⏳ Pending</td>
+      <td>completed ✅</td>
     </tr>
     <tr>
       <td>Phase 7: Testing + Optimization</td>
-      <td>⏳ Pending</td>
+      <td>completed ✅</td>
     </tr>
   </tbody>
 </table>
